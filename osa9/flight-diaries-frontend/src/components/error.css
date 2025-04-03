@@ -1,0 +1,7 @@
+p .active {
+    color: red;
+}
+
+p .no-active {
+    display: none;
+}
