@@ -3,7 +3,6 @@ import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
 import Recommendations from "./components/Recommendations";
-import Notify from "./components/Notify";
 import { GET_AUTHORS, GET_BOOKS, GET_GENRES, LOGIN, ME, BOOK_ADDED } from "./components/queries";
 import { useQuery, useApolloClient, useMutation, useSubscription  } from '@apollo/client';
 import LoginForm from "./components/LoginForm";
@@ -26,8 +25,6 @@ export const updateCache = (cache, query, addedBook) => {
 const App = () => {
   const [page, setPage] = useState("authors");
    const [token, setToken] = useState(null);
-   const [notification, setNotification] = useState(null);
-   const [noteColor, setNoteColor] = useState(null);
    const client = useApolloClient()
 
   const authors = useQuery(GET_AUTHORS, {fetchPolicy: "network-only"})

@@ -15,6 +15,7 @@ const NewBook = (props) => {
 
   const [createBook] = useMutation(CREATE_BOOK, {
     fetchPolicy: "network-only",
+    refetchQueries: {query: GET_BOOKS},
     update: () => {
       setNotification('Book added!')
       setNoteColor('green')

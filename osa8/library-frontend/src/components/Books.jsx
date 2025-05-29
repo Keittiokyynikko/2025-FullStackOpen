@@ -1,17 +1,10 @@
 import { useState, useEffect } from "react";
 import "./Books.css"
-import { BOOKS_BY_GENRE } from "./queries";
-import { useQuery } from '@apollo/client';
 
 const Books = ({books, show, genres}) => {
 
   const [selGenre, setSelGenre] = useState(undefined);
-  const [filterBooks, setFilterBooks] = useState([])
-
-  useEffect(() => {
-    setFilterBooks(books)
-  }, [])
-
+  const [filterBooks, setFilterBooks] = useState(undefined)
   
   if (!show) {
     return null
@@ -21,10 +14,11 @@ const Books = ({books, show, genres}) => {
     event.preventDefault()
     if(value !== selGenre) {
       setSelGenre(value)
-      setFilterBooks(books.filter(b => b.genres.includes(value)))
+      books = books.filter(b => b.genres.includes(value))
+      setFilterBooks(books)
     } else {
       setSelGenre("")
-      setFilterBooks(books)
+      setFilterBooks(null)
       books = books
       
     };
@@ -43,7 +37,13 @@ const Books = ({books, show, genres}) => {
             <th>author</th>
             <th>published</th>
           </tr>
-          {filterBooks.map((a) => (
+          {filterBooks ? filterBooks.map((a) => (
+            <tr key={a.title}>
+              <td>{a.title}</td>
+              <td>{a.author.name}</td>
+              <td>{a.published}</td>
+            </tr>
+          )) : books.map((a) => (
             <tr key={a.title}>
               <td>{a.title}</td>
               <td>{a.author.name}</td>
