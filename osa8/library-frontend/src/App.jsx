@@ -58,12 +58,11 @@ const App = () => {
         const token = result.data.login.value
         setToken(token)
         localStorage.setItem('library-user-token', token)
-        setPage("recommendations")
+        window.location.reload(false)
       }
     }, [result.data])
 
     useEffect(() => {
-      console.log(me)
       const loggedUser = window.localStorage.getItem('library-user-token')
       if(loggedUser) {
         setToken(loggedUser)
@@ -121,7 +120,7 @@ const App = () => {
   
         <Books show={page === "books"} books={books.data.allBooks} genres={genres.data.allGenres} />
 
-        <Recommendations show={page === "recommendations"} />
+        <Recommendations show={page === "recommendations"} me={me.data.me} books={books.data.allBooks}/>
   
         <NewBook show={page === "add"} />
   
