@@ -30,7 +30,6 @@ const addNewEntry = (id: string, entry: EntryWithoutId): Entry => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const new_id: string = uuid();
     const patient = patients.find(p => p.id === id);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const newEntry = {id: new_id, ...entry};
     if(patient) {
         patient?.entries?.push(newEntry);
